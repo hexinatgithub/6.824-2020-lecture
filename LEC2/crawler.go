@@ -24,7 +24,7 @@ func Serial(url string, fetcher Fetcher, fetched map[string]bool) {
 		return
 	}
 	for _, u := range urls {
-		go Serial(u, fetcher, fetched)
+		Serial(u, fetcher, fetched)
 	}
 	return
 }
@@ -55,7 +55,7 @@ func ConcurrentMutex(url string, fetcher Fetcher, f *fetchState) {
 	var done sync.WaitGroup
 	for _, u := range urls {
 		done.Add(1)
-		u2 := u
+        u2 := u
 		go func() {
 			defer done.Done()
 			ConcurrentMutex(u2, fetcher, f)
